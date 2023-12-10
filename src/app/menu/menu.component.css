@@ -1,11 +1,11 @@
 mat-sidenav-container{
   height: 100vh;
+  background: #C0C0C0;
 }
 
 mat-sidenav{
   height: 100%;
   width: 230px;
-  background-color: white;
 }
 
 .contenedor{
@@ -47,3 +47,14 @@ a{
   height: auto ;
   width:auto ;
 }
+
+.contenedorHijo{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: center;
+}
+
+
+
+

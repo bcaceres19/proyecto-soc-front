@@ -1,0 +1,53 @@
+.contenedor {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96vw;
+  height:100vh;
+  flex-flow: column wrap;
+}
+
+.email, .descripReport, .tipoReport{
+  margin-top: 5px;
+  width: 557px;
+  border-radius: 13px;
+}
+
+mat-label{
+  color: black;
+  border-color: black;
+}
+
+
+.botones{
+  width: 24vw;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+}
+
+.perdiste-contra{
+  margin-top: 40px;
+}
+
+.imgAcceso{
+  width: auto;
+  height: 100px;
+  margin-bottom: 10px;
+}
+
+.button-crear, .button-cancelar{
+  color: #000;
+  text-align: center;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  border-radius: 15px;
+  height: 50px;
+  width: 150px;
+}
+
+

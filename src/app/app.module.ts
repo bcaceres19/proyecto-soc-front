@@ -13,13 +13,22 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatIconModule} from "@angular/material/icon";
 import {MatInputModule} from "@angular/material/input";
+import { AdministracionComponent } from './administracion/administracion.component';
+import {ScrollingModule} from "@angular/cdk/scrolling";
+import { DestalleReporteComponent } from './destalle-reporte/destalle-reporte.component';
+import { RegistroReporteComponent } from './registro-reporte/registro-reporte.component';
+import {MatOptionModule} from "@angular/material/core";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistroComponent,
-    MenuComponent
+    MenuComponent,
+    AdministracionComponent,
+    DestalleReporteComponent,
+    RegistroReporteComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +39,10 @@ import {MatInputModule} from "@angular/material/input";
     MatButtonModule,
     MatToolbarModule,
     MatIconModule,
-    MatInputModule
+    MatInputModule,
+    ScrollingModule,
+    MatOptionModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

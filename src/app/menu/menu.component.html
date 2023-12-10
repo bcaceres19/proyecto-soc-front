@@ -23,8 +23,15 @@
     </div>
   </mat-sidenav>
   <mat-sidenav-content>
-    <button mat-icon-button (click)="cambiarEstado()">
-      <mat-icon class="menu">menu</mat-icon>
-    </button>
+    <div class="contenedorHijo">
+      <div class="parteUno">
+        <button mat-icon-button (click)="cambiarEstado()">
+          <mat-icon class="menu">menu</mat-icon>
+        </button>
+      </div>
+      <div class="parteDos">
+        <app-registro-reporte></app-registro-reporte>
+      </div>
+    </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
