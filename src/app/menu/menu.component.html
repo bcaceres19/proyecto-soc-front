@@ -7,18 +7,18 @@
         <img src="assets/images/acceso-sidenav.png" alt="acceso" class="imgAcceso">
       </div>
       <div class="inicio">
-        <a mat-button>Inicio</a>
+        <a mat-button routerLink="administrador">Inicio</a>
       </div>
       <div class="reportes">
-        <a mat-button>Reportes</a>
+        <a mat-button routerLink="reporte">Reportes</a>
       </div>
       <div class="crearAdmin">
-        <a mat-button>Crear Admin</a>
+        <a mat-button routerLink="registraradmin">Crear Admin</a>
       </div>
       <div class="itemEspacio">
       </div>
       <div class="salir">
-        <a mat-button>Salir</a>
+        <a mat-button routerLink="">Salir</a>
       </div>
     </div>
   </mat-sidenav>
@@ -30,7 +30,7 @@
         </button>
       </div>
       <div class="parteDos">
-        <app-registro-reporte></app-registro-reporte>
+        <router-outlet></router-outlet>
       </div>
     </div>
   </mat-sidenav-content>

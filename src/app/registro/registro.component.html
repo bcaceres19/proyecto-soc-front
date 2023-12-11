@@ -1,4 +1,4 @@
-<form class="contenedor">
+<form class="contenedor" [formGroup]="registroForm" (ngSubmit)="onRegistro(registroForm.value)">
   <div class="itemEspacio">
   </div>
   <div class="imagen">
@@ -6,32 +6,41 @@
   </div>
   <mat-form-field class="email">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="Email">
+    <input matInput type="email" placeholder="Email" formControlName="email">
+    <mat-error *ngIf="email.errors?.['email'] && !email.errors?.['required']">Porfavor, ingresa un correo valido</mat-error>
+    <mat-error *ngIf="email.errors?.['required']">El correo es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="nombres">
     <mat-label>Nombres</mat-label>
-    <input matInput placeholder="Nombres">
+    <input matInput placeholder="Nombres" formControlName="nombres">
+    <mat-error *ngIf="nombres.errors?.['required']">El nombre es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="apellidos">
     <mat-label>Apellidos</mat-label>
-    <input matInput placeholder="Apellidos">
+    <input matInput placeholder="Apellidos" formControlName="apellidos">
+    <mat-error *ngIf="apellidos.errors?.['required']">El apellido es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="password">
     <mat-label>Contraseña</mat-label>
-    <input matInput placeholder="Contraseña">
+    <input matInput type="password" placeholder="Contraseña" formControlName="password">
+    <mat-error *ngIf="password.touched">La contraseña debe tener como minimo 8 caracteres</mat-error>
+    <mat-error *ngIf="password.errors?.['required']">La contraseña es <strong>requerida</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="repeatPassword">
     <mat-label>Repetir Contraseña</mat-label>
-    <input matInput placeholder="Repetir Contraseña">
+    <input matInput type="password" placeholder="Repetir Contraseña" formControlName="repetirPassword">
+    <mat-error *ngIf="password.touched">La contraseña debe tener como minimo 8 caracteres</mat-error>
+    <mat-error *ngIf="repetirPassword.errors?.['required']">Repetir la contraseña es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <div class="botones">
     <div>
-      <button mat-raised-button  class="button-registrar">Registrar</button>
+      <button mat-raised-button  class="button-registrar" [disabled]="email.invalid || nombres.invalid || apellidos.invalid || password.invalid || repetirPassword.invalid">Registrar</button>
     </div>
     <div>
-      <button mat-raised-button  class="button-cancelar">Cancelar</button>
+      <a routerLink=""><button mat-raised-button  class="button-cancelar">Cancelar</button></a>
     </div>
   </div>
+  <mat-error style="font-size: 15px;" *ngIf="errorStatus || errorPassword">{{errorMensaje}}</mat-error>
 
 </form>
 

@@ -1,4 +1,4 @@
-<form class="contenedor">
+<form class="contenedor" [formGroup]="loginForm" (ngSubmit)="onLogin(loginForm.value)">
   <div class="itemEspacio">
   </div>
   <div class="imagen">
@@ -6,20 +6,24 @@
   </div>
   <mat-form-field class="email">
     <mat-label>Email</mat-label>
-    <input matInput placeholder="Email">
+    <input matInput type='email' placeholder="Email" formControlName="email">
+    <mat-error *ngIf="email.errors?.['email'] && !email.errors?.['required']">Porfavor, ingresa un correo valido</mat-error>
+    <mat-error *ngIf="email.errors?.['required']">El correo es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="password">
     <mat-label>Contraseña</mat-label>
-    <input matInput placeholder="Contraseña">
+    <input matInput type="password" placeholder="Contraseña" formControlName="password">
+    <mat-error *ngIf="password.errors?.['required']">La contraseña es <strong>requerida</strong></mat-error>
   </mat-form-field>
   <div>
-    <button mat-raised-button  class="button-login">Login</button>
+    <button mat-raised-button class="button-login" [disabled]="email.invalid || password.invalid">Login</button>
   </div>
+  <mat-error style="font-size: 15px;" *ngIf="errorStatus">{{errorMensaje}}</mat-error>
   <div class="perdiste-contra">
     <p>Perdiste tu contraseña?</p>
   </div>
   <div class="registro">
-    <p>No tienes cuenta? Registrate</p>
+    <p>¿No tienes cuenta? <a routerLink="crearusuario">Registrate</a></p>
   </div>
 </form>
 

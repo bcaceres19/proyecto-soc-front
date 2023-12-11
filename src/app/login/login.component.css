@@ -31,6 +31,7 @@ mat-label{
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  border-radius: 15px;
 }
 
 .perdiste-contra{
