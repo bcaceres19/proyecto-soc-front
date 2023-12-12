@@ -12,12 +12,12 @@
   </mat-form-field>
   <mat-form-field class="nombres">
     <mat-label>Nombres</mat-label>
-    <input matInput placeholder="Nombres" formControlName="nombres">
+    <input matInput placeholder="Nombres" formControlName="nombre">
     <mat-error *ngIf="nombres.errors?.['required']">El nombre es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="apellidos">
     <mat-label>Apellidos</mat-label>
-    <input matInput placeholder="Apellidos" formControlName="apellidos">
+    <input matInput placeholder="Apellidos" formControlName="apellido">
     <mat-error *ngIf="apellidos.errors?.['required']">El apellido es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="password">

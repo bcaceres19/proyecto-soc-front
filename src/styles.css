@@ -2,3 +2,9 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; background: #C0C0C0}
+a {
+    text-decoration: none; /* Para quitar subrayado */
+    color: inherit; /* Para usar el color del texto heredado */
+    cursor: inherit; /* Para heredar el cursor predeterminado */
+    font-weight: inherit; /* Para heredar el peso de la fuente */
+}

@@ -1,56 +1,68 @@
 
 export class AdminUserDto{
-  private _id:number;
-  private _email: string;
-  private _password:string;
-  private _admin: boolean;
-  private _usuario:boolean;
+  private _id:number | undefined;
+  private _email: string | undefined;
+  private _password:string | undefined;
+  private _admin: boolean | undefined;
+  private _usuario:boolean | undefined;
+  private _actividad:boolean | undefined;
 
-  constructor(id: number, email: string, password: string, admin: boolean, usuario: boolean) {
+
+  constructor(id?: number, email?: string, password?: string, admin?: boolean, usuario?: boolean,actividad?:boolean) {
     this._id = id;
     this._email = email;
     this._password = password;
     this._admin = admin;
     this._usuario = usuario;
+    this._actividad = actividad;
   }
 
-  get id(): number {
+
+  get id(): number | undefined {
     return this._id;
   }
 
-  set id(value: number) {
+  set id(value: number | undefined) {
     this._id = value;
   }
 
-  get email(): string {
+  get email(): string | undefined {
     return this._email;
   }
 
-  set email(value: string) {
+  set email(value: string | undefined) {
     this._email = value;
   }
 
-  get password(): string {
+  get password(): string | undefined {
     return this._password;
   }
 
-  set password(value: string) {
+  set password(value: string | undefined) {
     this._password = value;
   }
 
-  get admin(): boolean {
+  get admin(): boolean | undefined {
     return this._admin;
   }
 
-  set admin(value: boolean) {
+  set admin(value: boolean | undefined) {
     this._admin = value;
   }
 
-  get usuario(): boolean {
+  get usuario(): boolean | undefined {
     return this._usuario;
   }
 
-  set usuario(value: boolean) {
+  set usuario(value: boolean | undefined) {
     this._usuario = value;
+  }
+
+  get actividad(): boolean | undefined {
+    return this._actividad;
+  }
+
+  set actividad(value: boolean | undefined) {
+    this._actividad = value;
   }
 }

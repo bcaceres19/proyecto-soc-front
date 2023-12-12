@@ -17,8 +17,8 @@ export class RegistroComponent {
   registroForm:FormGroup<any>=new FormGroup(
     {
       email: new FormControl('', [Validators.required, Validators.email]),
-      nombres: new FormControl('', Validators.required),
-      apellidos: new FormControl('', Validators.required),
+      nombre: new FormControl('', Validators.required),
+      apellido: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(8)]),
       repetirPassword: new FormControl('', [Validators.required, Validators.minLength(8)])
     }
@@ -33,11 +33,11 @@ export class RegistroComponent {
   }
 
   get nombres(){
-    return this.registroForm.get('nombres') as FormControl;
+    return this.registroForm.get('nombre') as FormControl;
   }
 
   get apellidos(){
-    return this.registroForm.get('apellidos') as FormControl;
+    return this.registroForm.get('apellido') as FormControl;
   }
 
   get password(){

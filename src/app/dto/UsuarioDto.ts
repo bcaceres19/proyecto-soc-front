@@ -4,13 +4,24 @@ export class UsuarioDto{
   private _apellido:string;
   private _email:string;
   private _password:string;
+  private _actividad:boolean
 
 
-  constructor(nombre: string, apellido: string, email: string, password: string) {
+  constructor(nombre: string, apellido: string, email: string, password: string, actividad:boolean) {
     this._nombre = nombre;
     this._apellido = apellido;
     this._email = email;
     this._password = password;
+    this._actividad = actividad
+  }
+
+
+  get actividad(): boolean {
+    return this._actividad;
+  }
+
+  set actividad(value: boolean) {
+    this._actividad = value;
   }
 
   get nombre(): string {

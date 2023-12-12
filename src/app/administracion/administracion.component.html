@@ -2,42 +2,22 @@
   <div class="itemSepracion"></div>
   <div class="contenedorHijo">
     <div class="subContenedorPri">
-      <p class="titulos">Usuarios Activos</p>
+      <p class="titulos">{{tituloActivos}} Activos</p>
       <div class="contUsuarios">
-        <div class="usuarios">
-          <span class="correo">Correo Usuario</span>
-          <span class="check">Check</span>
-        </div>
-        <div class="usuarios">
-          <span class="correo">Correo Usuario</span>
-          <span class="check">Check</span>
-        </div>
-        <div class="usuarios">
-          <span class="correo">Correo Usuario</span>
-          <span class="check">Check</span>
+        <div *ngFor="let usuario of listaUsuarios" class="usuarios">
+          <span *ngIf="tituloActivos == 'Admins'" class="correo">{{usuario.nombre}}</span>
+          <span *ngIf="tituloActivos == 'Usuarios'" class="correo">{{usuario.email}}</span>
+          <input class="activo" type="radio" [checked]="usuario.actividad" disabled>
         </div>
       </div>
     </div>
     <div class="subContenedorSeg">
       <p class="titulos">Reportes Recientes</p>
       <div class="contReportes">
-        <div class="reportes">
-          <span class="nombre">Nombre</span>
-          <span class="fecha">Fecha</span>
+        <div *ngFor="let reporte of listaReportes" class="reportes">
+          <span class="nombre">{{reporte.nombreReporte}}</span>
+          <span class="fecha">{{String(reporte.fechaCreacion).replace("T", " ")}}</span>
         </div>
-        <div class="reportes">
-          <span class="nombre">Nombre</span>
-          <span class="fecha">Fecha</span>
-        </div>
-        <div class="reportes">
-          <span class="nombre">Nombre</span>
-          <span class="fecha">Fecha</span>
-        </div>
-        <div class="reportes">
-          <span class="nombre">Nombre</span>
-          <span class="fecha">Fecha</span>
-        </div>
-
       </div>
     </div>
   </div>

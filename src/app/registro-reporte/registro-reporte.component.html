@@ -1,32 +1,27 @@
-<form class="contenedor">
+<form class="contenedor" [formGroup]="registroReport" (ngSubmit)="onRegistro(registroReport.value)">
   <div class="itemEspacio">
   </div>
   <div class="imagen">
     <img src="assets/images/archivo-form.png" alt="acceso" class="imgAcceso">
   </div>
   <mat-form-field class="email">
-    <mat-label>Email</mat-label>
-    <input matInput placeholder="Email">
+    <mat-label>Titulo</mat-label>
+    <input matInput type="text" placeholder="Titulo" formControlName="titulo">
+    <mat-error *ngIf="titulo.errors?.['required']">El titulo es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="descripReport">
     <mat-label>Descripcion Reporte</mat-label>
-    <textarea matInput rows="5"></textarea>
-  </mat-form-field>
-  <mat-form-field class="tipoReport">
-    <mat-label>Tipo Reporte</mat-label>
-    <mat-select>
-      <mat-option value="one">First option</mat-option>
-      <mat-option value="two">Second option</mat-option>
-    </mat-select>
+    <textarea matInput rows="10" formControlName="contenido"></textarea>
+    <mat-error *ngIf="contenido.errors?.['required']">El contenido del reporte es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <div class="botones">
     <div>
-      <button mat-raised-button  class="button-crear">Crear</button>
+      <button mat-raised-button  class="button-crear" [disabled]="titulo.invalid || contenido.invalid">Crear</button>
     </div>
     <div>
       <button mat-raised-button  class="button-cancelar">Cancelar</button>
     </div>
   </div>
-
+  <mat-error style="font-size: 15px;" *ngIf="errorStatus">{{errorMensaje}}</mat-error>
 </form>
 

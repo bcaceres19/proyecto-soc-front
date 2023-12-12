@@ -23,7 +23,6 @@ export class LoginComponent {
 
   errorStatus:boolean = false;
   errorMensaje:string = '';
-
   get email(){
     return this.loginForm.get("email") as FormControl;
   }
@@ -42,11 +41,19 @@ export class LoginComponent {
           let adminUser:AdminUserDto=plainToClass(AdminUserDto, dataResponse.mensaje);
           if(dataResponse.codigo == "200"){
             if(adminUser.admin){
-              localStorage.setItem("admin", "true");
+              localStorage.setItem("actAdmin", "true");
             }else if(adminUser.usuario){
-              localStorage.setItem("usuario", "true");
+              localStorage.setItem("actUsuario", "true");
             }
-            this.router.navigate(["administrador"]);
+            localStorage.setItem("id", String(adminUser.id))
+            adminUser.actividad=true;
+            this.api.actualizarEstado(adminUser).subscribe({
+              next:(v) => {
+                this.router.navigate(["administrador"]);
+              },
+              error:(e) => console.log(e),
+              complete:() => console.log("Se cambio el estado")
+            })
           }else{
             this.errorStatus = true;
             this.errorMensaje = dataResponse.mensaje.toString();

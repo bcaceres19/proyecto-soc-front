@@ -7,18 +7,18 @@
         <img src="assets/images/acceso-sidenav.png" alt="acceso" class="imgAcceso">
       </div>
       <div class="inicio">
-        <a mat-button routerLink="administrador">Inicio</a>
+        <a mat-button routerLink="inicio">Inicio</a>
       </div>
       <div class="reportes">
         <a mat-button routerLink="reporte">Reportes</a>
       </div>
       <div class="crearAdmin">
-        <a mat-button routerLink="registraradmin">Crear Admin</a>
+        <a mat-button [routerLink]="redireccion">Crear {{formularioCrear}}</a>
       </div>
       <div class="itemEspacio">
       </div>
       <div class="salir">
-        <a mat-button routerLink="">Salir</a>
+        <a mat-button (click)="onSalir()">Salir</a>
       </div>
     </div>
   </mat-sidenav>

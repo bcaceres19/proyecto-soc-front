@@ -15,7 +15,7 @@
 
 .subContenedorPri{
   width: 450px;
-  height: 100%;
+  height: 520px;
 }
 
 .subContenedorSec{
@@ -52,6 +52,17 @@
   justify-content: space-around;
   align-items: center;
   margin-top: 20px;
+  cursor: pointer;
+}
+
+.reportes:hover{
+  transform: translateY(-5px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+.reportes:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 
 .nombre, .fecha{
@@ -62,7 +73,7 @@
   justify-content: center;
   color: #000;
   text-align: center;
-  font-size: 22px;
+  font-size: 19px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -156,6 +167,7 @@
 }
 
 .inputBusqueda{
+  padding: 10px;
   width: 530px;
   height: auto;
   border-radius: 20px;

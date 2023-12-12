@@ -19,8 +19,13 @@ const routes: Routes =[
     component:MenuComponent,
     children: [
       {
-        path: '',
+        path: 'inicio',
         component: AdministracionComponent
+      },
+      {
+        path:'',
+        redirectTo:'inicio',
+        pathMatch:'full'
       },
       {
         path: 'reporte',
