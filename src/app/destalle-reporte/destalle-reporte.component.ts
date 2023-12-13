@@ -49,8 +49,8 @@ export class DestalleReporteComponent {
   constructor(private api:ApiService, private router: Router) {}
 
   ngOnInit() {
-    let actUser: boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-    let actAdmin: boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    let actUser: boolean = sessionStorage.getItem("actUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
+    let actAdmin: boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
     this.getReportes(actUser, actAdmin);
     this.suscripcion = this.api.refresh$.subscribe(()=>{
       this.reporteF.setValue('')
@@ -60,7 +60,7 @@ export class DestalleReporteComponent {
 
   getReportes(actUser:boolean, actAdmin:boolean):void{
     if(actUser){
-      let idUsuario:number = Number(localStorage.getItem("id"))
+      let idUsuario:number = Number(sessionStorage.getItem("id"))
       this.botonAdminUser='Actualizar';
       this.api.reportesUsuarios(idUsuario).subscribe({
         next: (v) => {
@@ -70,7 +70,7 @@ export class DestalleReporteComponent {
         complete: () => console.log("Se trajeron todos los reportes")
       })
     }else if(actAdmin){
-      let idAdmin:number = Number(localStorage.getItem("id"))
+      let idAdmin:number = Number(sessionStorage.getItem("id"))
       this.botonAdminUser='Confirmar'
       this.api.reportesAdmin(idAdmin).subscribe({
         next: (v) => {
@@ -90,9 +90,9 @@ export class DestalleReporteComponent {
     codigoReporte: FormControl<string | null>;
     fechaCreacion: FormControl<string | null>
   }, ɵFormGroupValue<{ codigoReporte: FormControl<string | null>; fechaCreacion: FormControl<string | null> }>, any>){
-    let actUser:boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
-    let idUsuario:number = Number(localStorage.getItem("id"))
+    let actUser:boolean = sessionStorage.getItem("actUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
+    let actAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
+    let idUsuario:number = Number(sessionStorage.getItem("id"))
     if(this.controladorBusqueda == 'codigoReporte'){
       this.api.buscarReporteCodigo(reporte.codigoReporte!, actAdmin ? idUsuario : null,  actUser ? idUsuario : null).subscribe({
         next:(v) => {
@@ -112,8 +112,8 @@ export class DestalleReporteComponent {
           complete: () => console.log("Se trajeron todos los reportes")
         })
       }else{
-        let actUser: boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-        let actAdmin: boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+        let actUser: boolean = sessionStorage.getItem("FactUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
+        let actAdmin: boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
         this.getReportes(actUser, actAdmin);
       }
     }

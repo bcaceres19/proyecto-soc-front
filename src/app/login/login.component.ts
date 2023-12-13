@@ -41,11 +41,11 @@ export class LoginComponent {
           let adminUser:AdminUserDto=plainToClass(AdminUserDto, dataResponse.mensaje);
           if(dataResponse.codigo == "200"){
             if(adminUser.admin){
-              localStorage.setItem("actAdmin", "true");
+              sessionStorage.setItem("actAdmin", "true");
             }else if(adminUser.usuario){
-              localStorage.setItem("actUsuario", "true");
+              sessionStorage.setItem("actUsuario", "true");
             }
-            localStorage.setItem("id", String(adminUser.id))
+            sessionStorage.setItem("id", String(adminUser.id))
             adminUser.actividad=true;
             this.api.actualizarEstado(adminUser).subscribe({
               next:(v) => {

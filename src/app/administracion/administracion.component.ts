@@ -22,11 +22,11 @@ export class AdministracionComponent {
   constructor(private api:ApiService, private router: Router) {}
 
   ngOnInit(){
-    let actUser:boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    let actUser:boolean = sessionStorage.getItem("actUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
+    let actAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
     if(actAdmin){
       this.tituloActivos = 'Usuarios';
-      let idAdmin:number = Number(localStorage.getItem("id"))
+      let idAdmin:number = Number(sessionStorage.getItem("id"))
       this.api.allUsuarios().subscribe({
         next: (v) => {
           this.listaUsuarios = plainToClass(Array<UsuarioDto>,v.mensaje)
@@ -43,7 +43,7 @@ export class AdministracionComponent {
       })
     }else if(actUser){
         this.tituloActivos = 'Admins';
-        let idUsuario:number = Number(localStorage.getItem("id"))
+        let idUsuario:number = Number(sessionStorage.getItem("id"))
         this.api.allAdmins().subscribe(
             {
                 next:(v) => {

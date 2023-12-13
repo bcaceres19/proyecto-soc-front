@@ -52,7 +52,7 @@ export class RegistroComponent {
   constructor(private api:ApiService, private router:Router) {}
 
   onClose(){
-    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    let actAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
     if(!actAdmin){
       this.router.navigate([""]);
     }else{
@@ -65,7 +65,7 @@ export class RegistroComponent {
       this.errorPassword = true;
       this.errorMensaje = "Las contraseñas no son iguales"
     }else {
-      let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+      let actAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
       if(!actAdmin){
         this.api.crearUsuario(formulario).subscribe(
           {

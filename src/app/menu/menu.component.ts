@@ -23,8 +23,8 @@ export class MenuComponent {
   }
 
   ngOnInit() {
-    let actUser:boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    let actUser:boolean = sessionStorage.getItem("actUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
+    let actAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
     if(actUser){
       this.formularioCrear='Reporte';
       this.redireccion = 'registroreporte';
@@ -35,14 +35,13 @@ export class MenuComponent {
   }
 
     onSalir(){
-    let id:number = Number(localStorage.getItem("id"));
-    let activoAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
-    let activoUsuario:boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
+    let id:number = Number(sessionStorage.getItem("id"));
+    let activoAdmin:boolean = sessionStorage.getItem("actAdmin") != null ? Boolean(sessionStorage.getItem("actAdmin")) : false;
+    let activoUsuario:boolean = sessionStorage.getItem("actUsuario") != null ? Boolean(sessionStorage.getItem("actUsuario")) : false;
     let adminUserDto:AdminUserDto = new AdminUserDto(id,undefined, undefined,activoAdmin, activoUsuario, false);
-    console.log(adminUserDto)
     this.api.actualizarEstado(adminUserDto).subscribe({
       next:(v) => {
-        localStorage.clear();
+        sessionStorage.clear();
         this.route.navigate([""]);
       },
       error:(e) => console.log(e),

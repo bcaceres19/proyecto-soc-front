@@ -67,7 +67,7 @@ export class RegistroReporteComponent {
   }
 
   onRegistro(formulario:ReporteCommand){
-    let id:number = Number(localStorage.getItem("id"));
+    let id:number = Number(sessionStorage.getItem("id"));
     formulario.usuarioCreacion = id;
     if(this.textoBoton == 'Actualizar'){
       formulario.codigoReporte = this.codigoReporte;
