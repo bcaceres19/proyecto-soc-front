@@ -1,7 +1,10 @@
-export interface ReporteCommand{
+import {FormControl} from "@angular/forms";
 
-    titulo:string;
-    contenido:string;
+export interface ReporteCommand{
+    codigoReporte: string;
+    tituloReporte:string;
+    cuerpoGeneral:string;
     usuarioCreacion:number;
+    fechaCreacion: Date;
 
 }

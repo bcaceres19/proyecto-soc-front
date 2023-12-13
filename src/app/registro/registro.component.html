@@ -30,14 +30,13 @@
     <mat-label>Repetir Contraseña</mat-label>
     <input matInput type="password" placeholder="Repetir Contraseña" formControlName="repetirPassword">
     <mat-error *ngIf="password.touched">La contraseña debe tener como minimo 8 caracteres</mat-error>
-    <mat-error *ngIf="repetirPassword.errors?.['required']">Repetir la contraseña es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <div class="botones">
     <div>
       <button mat-raised-button  class="button-registrar" [disabled]="email.invalid || nombres.invalid || apellidos.invalid || password.invalid || repetirPassword.invalid">Registrar</button>
     </div>
     <div>
-      <a routerLink=""><button mat-raised-button  class="button-cancelar">Cancelar</button></a>
+      <button mat-raised-button  class="button-cancelar" (click)="onClose()">Cancelar</button>
     </div>
   </div>
   <mat-error style="font-size: 15px;" *ngIf="errorStatus || errorPassword">{{errorMensaje}}</mat-error>

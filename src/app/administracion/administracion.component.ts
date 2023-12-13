@@ -26,12 +26,20 @@ export class AdministracionComponent {
     let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
     if(actAdmin){
       this.tituloActivos = 'Usuarios';
+      let idAdmin:number = Number(localStorage.getItem("id"))
       this.api.allUsuarios().subscribe({
         next: (v) => {
           this.listaUsuarios = plainToClass(Array<UsuarioDto>,v.mensaje)
         },
         error:(e) => console.log(e),
         complete: () => console.log("Se trajeron todos los usuarios")
+      })
+      this.api.reportesAdmin(idAdmin).subscribe({
+        next: (v) => {
+          this.listaReportes = plainToClass(Array<ReportesDto>,v.mensaje)
+        },
+        error:(e) => console.log(e),
+        complete: () => console.log("Se trajeron todos los reportes")
       })
     }else if(actUser){
         this.tituloActivos = 'Admins';
@@ -55,6 +63,10 @@ export class AdministracionComponent {
       })
     }
 
+  }
+
+  viewDetalleReport(codigoReporte:string){
+    this.router.navigate(['administrador/reporte/' + codigoReporte]);
   }
 
     protected readonly String = String;

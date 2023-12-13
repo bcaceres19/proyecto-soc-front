@@ -32,6 +32,10 @@ const routes: Routes =[
         component: DestalleReporteComponent
       },
       {
+        path:'reporte/:codigo',
+        component: RegistroReporteComponent
+      },
+      {
         path: 'registraradmin',
         component: RegistroComponent
       },

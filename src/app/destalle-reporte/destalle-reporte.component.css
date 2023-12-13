@@ -98,12 +98,12 @@
 
 .botones{
   height: 50%;
-  width: 80%;
+  width: 100%;
   display: flex;
   justify-content: space-around;
 }
 
-.descargar, .confirmar{
+.descargar, .confirmar, .eliminar{
   width: 165px;
   height: 100%;
   border-radius: 15px;
@@ -187,4 +187,8 @@ input:focus{
   align-self: center;
   width: 50px;
   font-size: 45px;
+}
+
+textarea[disabled] {
+  color: #000;
 }

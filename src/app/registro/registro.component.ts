@@ -51,26 +51,55 @@ export class RegistroComponent {
 
   constructor(private api:ApiService, private router:Router) {}
 
+  onClose(){
+    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    if(!actAdmin){
+      this.router.navigate([""]);
+    }else{
+      this.router.navigate(["administrador/inicio"]);
+    }
+  }
+
   onRegistro(formulario:UsuarioCommand){
     if(formulario.password != formulario.repetirPassword){
       this.errorPassword = true;
       this.errorMensaje = "Las contraseñas no son iguales"
     }else {
-      this.api.crearUsuario(formulario).subscribe(
-        {
-          next:(v) => {
-            let dataResponse:ResponseI = v;
-            if(dataResponse.codigo == '201'){
-              this.router.navigate([""]);
-            }else{
-              this.errorStatus = true;
-              this.errorMensaje = dataResponse.mensaje.toString();
-            }
-          },
-          error:(e)=> console.log(e),
-          complete:() => console.log("Se copleto el registro")
-        }
-      )
+      let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+      if(!actAdmin){
+        this.api.crearUsuario(formulario).subscribe(
+          {
+            next:(v) => {
+              let dataResponse:ResponseI = v;
+              if(dataResponse.codigo == '201'){
+                this.router.navigate([""]);
+              }else{
+                this.errorStatus = true;
+                this.errorMensaje = dataResponse.mensaje.toString();
+              }
+            },
+            error:(e)=> console.log(e),
+            complete:() => console.log("Se copleto el registro")
+          }
+        )
+      }else{
+        this.api.crearAdmin(formulario).subscribe(
+          {
+            next:(v) => {
+              let dataResponse:ResponseI = v;
+              if(dataResponse.codigo == '201'){
+                this.router.navigate(["administrador/inicio"]);
+              }else{
+                this.errorStatus = true;
+                this.errorMensaje = dataResponse.mensaje.toString();
+              }
+            },
+            error:(e)=> console.log(e),
+            complete:() => console.log("Se copleto el registro")
+          }
+        )
+      }
+
     }
   }
 

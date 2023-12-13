@@ -1,6 +1,8 @@
 
 export class ReportesDto{
 
+  private _codigoReporte:string | undefined;
+
   private _fechaCreacion:Date | undefined;
 
   private _nombreReporte:string | undefined;
@@ -8,13 +10,44 @@ export class ReportesDto{
   private _contenido:string | undefined;
   private _archivo:string | undefined;
 
-  constructor(fechaCreacion?:Date, nombreReporte?:string, contenido?:string, archivo?: string) {
+  private _tituloReporte:string | undefined;
+
+  private _cuerpoGeneral:string | undefined;
+
+  constructor(fechaCreacion?:Date, nombreReporte?:string, contenido?:string, archivo?: string, codigo?:string, tituloReporte?:string, cuerpoGeneral?:string) {
     this._nombreReporte = nombreReporte;
     this._fechaCreacion = fechaCreacion;
     this._archivo = archivo;
     this._contenido = contenido;
+    this._codigoReporte = codigo;
+    this._tituloReporte = tituloReporte;
+    this._cuerpoGeneral = cuerpoGeneral;
   }
 
+
+  get tituloReporte(): string | undefined {
+    return this._tituloReporte;
+  }
+
+  set tituloReporte(value: string | undefined) {
+    this._tituloReporte = value;
+  }
+
+  get cuerpoGeneral(): string | undefined {
+    return this._cuerpoGeneral;
+  }
+
+  set cuerpoGeneral(value: string | undefined) {
+    this._cuerpoGeneral = value;
+  }
+
+  get codigoReporte(): string | undefined {
+    return this._codigoReporte;
+  }
+
+  set codigoReporte(value: string | undefined) {
+    this._codigoReporte = value;
+  }
 
   get contenido(): string | undefined {
     return this._contenido;

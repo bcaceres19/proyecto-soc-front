@@ -6,20 +6,20 @@
   </div>
   <mat-form-field class="email">
     <mat-label>Titulo</mat-label>
-    <input matInput type="text" placeholder="Titulo" formControlName="titulo">
-    <mat-error *ngIf="titulo.errors?.['required']">El titulo es <strong>requerido</strong></mat-error>
+    <input matInput type="text" placeholder="Titulo" formControlName="tituloReporte">
+    <mat-error *ngIf="tituloReporte.errors?.['required']">El titulo es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <mat-form-field class="descripReport">
     <mat-label>Descripcion Reporte</mat-label>
-    <textarea matInput rows="10" formControlName="contenido"></textarea>
-    <mat-error *ngIf="contenido.errors?.['required']">El contenido del reporte es <strong>requerido</strong></mat-error>
+    <textarea matInput rows="10" formControlName="cuerpoGeneral"></textarea>
+    <mat-error *ngIf="cuerpoGeneral.errors?.['required']">El contenido del reporte es <strong>requerido</strong></mat-error>
   </mat-form-field>
   <div class="botones">
     <div>
-      <button mat-raised-button  class="button-crear" [disabled]="titulo.invalid || contenido.invalid">Crear</button>
+      <button mat-raised-button  class="button-crear" [disabled]="tituloReporte.invalid || cuerpoGeneral.invalid">{{textoBoton}}</button>
     </div>
     <div>
-      <button mat-raised-button  class="button-cancelar">Cancelar</button>
+      <button mat-raised-button  class="button-cancelar" (click)="onSalir()">Cancelar</button>
     </div>
   </div>
   <mat-error style="font-size: 15px;" *ngIf="errorStatus">{{errorMensaje}}</mat-error>

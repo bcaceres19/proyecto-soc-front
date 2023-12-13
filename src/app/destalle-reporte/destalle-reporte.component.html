@@ -1,15 +1,16 @@
 <div class="contenedorPadre">
-  <div class="filtros">
+  <form class="filtros" [formGroup]="busquedaForm" (ngSubmit)="busqueda(busquedaForm.value)">
     <div class="buttonsFiltos">
       <button mat-raised-button class="codigoFil" (click)="cambiarTipoBus('text')">Codigo</button>
       <button mat-raised-button class="fechaFil" (click)="cambiarTipoBus('date')">Fecha</button>
     </div>
     <div class="busqueda">
       <button mat-raised-button class="buscar">Buscar</button>
-      <input [type]="tipoBusqueda"  class="inputBusqueda">
+      <input type="text"  class="inputBusqueda"  *ngIf="tipoBusqueda=='text'" formControlName="codigoReporte">
+      <input type="datetime-local"  class="inputBusqueda"  *ngIf="tipoBusqueda=='date'" formControlName="fechaCreacion">
       <mat-icon class="iconBusqueda">search</mat-icon>
     </div>
-  </div>
+  </form>
   <div class="contenedorHijo">
     <div class="itemSeparador"></div>
     <div class="subContenedorPri">
@@ -22,14 +23,15 @@
       </div>
     </div>
     <div class="subContenedorSec">
-      <form class="contDetalle">
+      <form class="contDetalle" [formGroup]="aereaForm">
         <mat-form-field class="descripReport">
-          <mat-label>Descripcion Reporte</mat-label>
-          <textarea matInput rows="15">{{contenidoDescripcion}}</textarea>
+          <label style="font-size: 22px"><strong>Reporte</strong></label>
+          <textarea  matInput rows="15" formControlName="reporteF" readonly="true"></textarea>
         </mat-form-field>
         <div class="botones">
-          <button mat-raised-button class="descargar" (click)="descargarArchivo()"><a [href]="linkDescarga" [download]="nombreArchivo">Descargar</a></button>
-          <button mat-raised-button class="confirmar">{{botonAdminUser}}</button>
+          <button mat-raised-button class="eliminar" (click)="onEliminar()" [disabled]="reporteF.invalid">Eliminar</button>
+          <button mat-raised-button class="descargar" (click)="descargarArchivo()" [disabled]="reporteF.invalid"><a [href]="linkDescarga" [download]="nombreArchivo">Descargar</a></button>
+          <button mat-raised-button class="confirmar" (click)="actualizarReporte(reporteActual.codigoReporte!)" [disabled]="reporteF.invalid">{{botonAdminUser}}</button>
         </div>
       </form>
     </div>

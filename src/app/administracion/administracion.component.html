@@ -14,7 +14,7 @@
     <div class="subContenedorSeg">
       <p class="titulos">Reportes Recientes</p>
       <div class="contReportes">
-        <div *ngFor="let reporte of listaReportes" class="reportes">
+        <div *ngFor="let reporte of listaReportes" class="reportes" (click)="viewDetalleReport(reporte.codigoReporte!)">
           <span class="nombre">{{reporte.nombreReporte}}</span>
           <span class="fecha">{{String(reporte.fechaCreacion).replace("T", " ")}}</span>
         </div>
