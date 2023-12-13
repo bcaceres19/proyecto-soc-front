@@ -6,7 +6,7 @@ import {FormControl, FormGroup, Validators, ɵFormGroupValue, ɵTypedOrUntyped} 
 import {ReporteCommand} from "../dto/ReporteCommand";
 import {ReporteBusquedaCommand} from "../dto/ReporteBusquedaCommand";
 import {Router} from "@angular/router";
-import {retry} from "rxjs";
+import {retry, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-destalle-reporte',
@@ -44,12 +44,21 @@ export class DestalleReporteComponent {
   nombreArchivo:string = '';
   tipoBusqueda:string = 'date';
   controladorBusqueda:string= 'fechaCreacion';
+  suscripcion: Subscription = new Subscription();
 
   constructor(private api:ApiService, private router: Router) {}
 
-  ngOnInit(){
-    let actUser:boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
-    let actAdmin:boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+  ngOnInit() {
+    let actUser: boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
+    let actAdmin: boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+    this.getReportes(actUser, actAdmin);
+    this.suscripcion = this.api.refresh$.subscribe(()=>{
+      this.reporteF.setValue('')
+      this.getReportes(actUser, actAdmin);
+    })
+  }
+
+  getReportes(actUser:boolean, actAdmin:boolean):void{
     if(actUser){
       let idUsuario:number = Number(localStorage.getItem("id"))
       this.botonAdminUser='Actualizar';
@@ -93,22 +102,29 @@ export class DestalleReporteComponent {
         complete: () => console.log("Se trajeron todos los reportes")
       })
     }else if(this.controladorBusqueda == 'fechaCreacion'){
-      let fecha:string = reporte.fechaCreacion + ":01";
-       this.api.buscarReporteFecha(fecha, actAdmin ? idUsuario : null,  actUser ? idUsuario : null).subscribe({
-         next:(v) => {
-           this.listaReportes = plainToClass(Array<ReportesDto>, v.mensaje)
-         },
-         error:(e) => console.log(e),
-         complete: () => console.log("Se trajeron todos los reportes")
-       })
+      if(reporte.fechaCreacion != ''){
+        let fecha:string = reporte.fechaCreacion + ":01";
+        this.api.buscarReporteFecha(fecha, actAdmin ? idUsuario : null,  actUser ? idUsuario : null).subscribe({
+          next:(v) => {
+            this.listaReportes = plainToClass(Array<ReportesDto>, v.mensaje)
+          },
+          error:(e) => console.log(e),
+          complete: () => console.log("Se trajeron todos los reportes")
+        })
+      }else{
+        let actUser: boolean = localStorage.getItem("actUsuario") != null ? Boolean(localStorage.getItem("actUsuario")) : false;
+        let actAdmin: boolean = localStorage.getItem("actAdmin") != null ? Boolean(localStorage.getItem("actAdmin")) : false;
+        this.getReportes(actUser, actAdmin);
+      }
     }
   }
 
   onEliminar(){
     this.api.eliminarReporte(this.reporteActual.codigoReporte!).subscribe({
       next:(v) => {
+        console.log(v.codigo)
         if(v.codigo == "200"){
-          this.router.navigate(["administrador/reporte"]);
+
         }
       },
       error:(e)=>console.log(e),
@@ -137,8 +153,6 @@ export class DestalleReporteComponent {
       if(this.botonAdminUser == 'Confirmar'){
         this.api.aceptarReporte(codigoReporte).subscribe({
           next:(v) => {
-            this.listaReportes = plainToClass(Array<ReportesDto>, v.mensaje)
-            this.router.navigate(['administrador/']);
           },
           error:(e) => console.log(e),
           complete: () => console.log("Se confirmo el reporte")

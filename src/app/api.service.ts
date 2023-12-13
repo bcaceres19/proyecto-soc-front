@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {ResponseI} from "./dto/ResponseI";
 import {AdminUserCommand} from "./dto/AdminUserCommand";
 import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {Observable, retry} from "rxjs";
+import {Observable, retry, Subject, tap} from "rxjs";
 import {UsuarioCommand} from "./dto/UsuarioCommand";
 import {AdminUserDto} from "./dto/AdminUserDto";
 import {ReporteCommand} from "./dto/ReporteCommand";
@@ -15,7 +15,11 @@ import {UsuarioDto} from "./dto/UsuarioDto";
 export class ApiService {
 
   url: string = "http://localhost:8080/api/v1/"
+  private _refresh$ = new Subject<void>();
 
+  get refresh$(){
+    return this._refresh$;
+  }
   constructor(private http: HttpClient) {
   }
 
@@ -105,9 +109,13 @@ export class ApiService {
     let direccion:string = this.url + "reporte/eliminar";
     let params = new HttpParams();
     params = params.append('codigo', codigo);
-    return this.http.delete<ResponseI>(direccion, {
+    return this.http.post<ResponseI>(direccion, {},{
       params:params
-    });
+    }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   aceptarReporte(codigo:string):Observable<ResponseI>{
@@ -116,7 +124,11 @@ export class ApiService {
     params = params.append('codigo', codigo);
     return this.http.post<ResponseI>(direccion, {},{
       params:params
-    });
+    }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   buscarReporteCodigo(codigo:string, idAdmin?:number | null, idUsuario?:number | null):Observable<ResponseI>{
